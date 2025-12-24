@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require('path');                 
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -7,7 +8,7 @@ const cheerio = require('cheerio');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -139,6 +140,14 @@ app.post('/api/analyze', async (req, res) => {
     console.error("[SERVER] Error in /api/analyze route:", error.message);
     res.status(500).json({ error: error.message || "An unknown server error occurred." });
   }
+});
+
+// Serve frontend build (Render same-server)
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// React fallback routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(port, () => {
