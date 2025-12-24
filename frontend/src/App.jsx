@@ -7,7 +7,7 @@ export default function ProductReviewAnalyzer() {
   const [loading, setLoading] = useState(false);
   const [analysis, setAnalysis] = useState(null);
   const [error, setError] = useState('');
-  
+  const API_URL = import.meta.env.VITE_API_URL;
 
 
   const analyzeReviews = async () => {
@@ -22,7 +22,7 @@ export default function ProductReviewAnalyzer() {
 
     try {
       // Call backend API 
-      const response = await fetch('/api/analyze', {
+     const response = await fetch(`${API_URL}/api/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
