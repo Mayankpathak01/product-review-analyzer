@@ -1,0 +1,22 @@
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global styles here */
+body {
+  font-family: 'Inter', sans-serif;
+  /* This matches the gradient in your App.jsx */
+  background-color: #1a202c; /* Fallback */
+}
+
+/* Custom animation for results fading in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
